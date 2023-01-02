@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <executable name="dist/default/production/WBZ451_E_PAPER.X.production.elf">
+    <memory name="program">
+      <units>bytes</units>
+      <length>1032192</length>
+      <used>164457</used>
+      <free>867735</free>
+    </memory>
+    <memory name="data">
+      <units>bytes</units>
+      <length>131072</length>
+      <used>94705</used>
+      <free>36367</free>
+    </memory>
+  </executable>
+</project>
