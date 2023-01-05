@@ -366,17 +366,7 @@ CLICK_EINK_BUNDLE_BSY
 
 **Step 16** - To the test the application in MBD app follow the steps provided below and the link for the [TRANSPARENT BLE UART](https://github.com/Microchip-MPLAB-Harmony/wireless_apps_pic32cxbz2_wbz45/tree/master/apps/ble/building_blocks/peripheral/profiles_services/peripheral_trp_uart).
 
-![](docs/mbd1.PNG) 
-
-![](docs/mbd2.PNG) 
-
-![](docs/mbd3.PNG) 
-
-![](docs/mbd4.PNG) 
-
-![](docs/mbd5.PNG) 
-
-![](docs/mbd6.PNG)
+![](docs/mbd1.png) ![](docs/mbd2.png) ![](docs/mbd3.png) ![](docs/mbd4.png) ![](docs/mbd5.png) ![](docs/mbd6.png)
 
 **Step 17** - The data printed onto the tera term is shown below.
 
