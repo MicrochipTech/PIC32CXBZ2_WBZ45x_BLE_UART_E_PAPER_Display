@@ -367,6 +367,8 @@ CLICK_EINK_BUNDLE_BSY
 
 ![](docs/mbd1.png) ![](docs/mbd2.png) ![](docs/mbd3.png) ![](docs/mbd4.png) ![](docs/mbd5.png) ![](docs/mbd6.png)
 
+| Note: For Android App Select BM70 instead of PIC32CXBZ in the step 2 as mentioned above !! |
+| --- |
 
 ## 6. Board Programming<a name="step6">
 
