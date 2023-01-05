@@ -80,7 +80,6 @@ The E-Paper 2.13" display is based on Active Matrix Electrophoretic Display (AME
 	  - wireless_pic32cxbz_wbz: v1.0.0
 	  - wireless_ble: v1.0.0	  
 	  - dev_packs: v3.13.1
-	  - gfx: v3.11.1
 	  - wolfssl version: v4.7.0
 	  - crypto version: v3.7.6
 	    
@@ -103,51 +102,15 @@ The E-Paper 2.13" display is based on Active Matrix Electrophoretic Display (AME
 
 ![](docs/1_project_graph.png)
 
-**Step 3** - In MCC harmony project graph, Add Legato from Device Resources under Libraries->Harmony->Graphics->Middleware and configure it.
+**Step 3** - In MCC harmony project graph, Add the SERCOM1 component under Libraries->Harmony->Peripherals->SERCOM->SERCOM1. select SERCOM1 and add "SPI" satisfiers by right click on the "⬦" near SPI to add the SPI component which will prompt an Auto-activation for "core"&"FreeRTOS" component, give yes to add the component and configure SERCOM1 and SPI as shown below.
 
-![](docs/LEGATO_RTOS.png)
-
-- To add satisfiers as shown below right click on the "⬦" in Legato->LE Display Driver and add the satisfier "LE External Controller" and will prompt an Auto-activation for "GFX Core LE" component, give yes to add the component. 
-
-![](docs/legao_satisfier.png)
-
-**Step 4** - In MCC harmony project graph, select LE External Controller and configure as mentioned below.
-
-![](docs/9_le_external_1.png) 
-
-- Use these comments while configuring.
-
-```
-Make display ON
-SET_REMAP_DUAL_COM_LINE_COMMAND
-SET_DISPLAY_START_LINE_COMMAND
-```
-
-![](docs/9_le_external_2.png)
-
-**Step 5** - In MCC harmony project graph, select GFX Core LE and configure as mentioned below.
-
-![](docs/6_gfx_core_le.png)
-
-- To add satisfiers as shown below right click on the "⬦" in LE External Controller->SPI Display Interface and add the satisfier "LE SPI 4-line" to add the component. 
-
-- Again right click on the "o" in LE External Controller->SYS_TIME and add the satisfier "TIME" and will prompt an Auto-activation for "core"&"FreeRTOS" component, give yes to add the component. 
-
-- Again right click on the "⬦" in TIME->TMR and add the satisfier "TC0" to add the component.
-
-![](docs/le_ext_cont_satis.png)
-
-**Step 6** - In MCC harmony project graph, select LE SPI 4-line and add satisfiers by right click on the "⬦" in LE SPI 4-line->DRV_SPI to add the "SPI" component and configure SPI as shown below.
-
-![](docs/spi_satis.png)
-
-![](docs/8_spi.png)
-
-**Step 7** - In MCC harmony project graph, select SPI and add satisfiers by right click on the "⬦" in Instance->SPI to add the SERCOM1 component and configure SERCOM1 as shown below.
+![](docs/sercom_spi.png)
 
 ![](docs/7_sercom1.png)
 
-**Step 8** - In MCC harmony project graph, Add the BLE Stack from device resources under Libraries->Harmony->wireless->drivers->BLE and will prompt an Auto-activation for "Device_Support","PDS_SubSystem","NVM","Cryptographic","wolfcrypt Library" component, give yes to add the component and give yes to Auto-connect.
+![](docs/8_spi.png)
+
+**Step 4** - In MCC harmony project graph, Add the BLE Stack from device resources under Libraries->Harmony->wireless->drivers->BLE and will prompt an Auto-activation for "Device_Support","PDS_SubSystem","NVM","Cryptographic","wolfcrypt Library" component, give yes to add the component and give yes to Auto-connect.
 
 - In Device_Support add satisfiers by right click on the "⬦" in Device_Support->RTC to add the RTC component.
 
@@ -161,20 +124,11 @@ SET_DISPLAY_START_LINE_COMMAND
 
 ![](docs/11_ble_stack_2.png)
 
-**Step 9** - In MCC harmony project graph, select wolfCrypt Library and configure as mentioned below.
+**Step 5** - In MCC harmony project graph, select wolfCrypt Library and configure as mentioned below.
 
 ![](docs/12_wolf.png)
 
-**Step 10** - In MCC harmony project graph, Add CONSOLE from Device Resources under Libraries->Harmony->System Services to add the "CONSOLE" component as shown below.
-
-![](docs/sercom0_satis.png)
-
-- To add satisfiers as shown above right click on the "⬦" in CONSOLE->UART and add the satisfier "SERCOM0" to add the component. Then select the SERCOM0 to configure as shown below.
-
-![](docs/10_sercom0.png)
-
-
-**Step 11** - In MCC harmony project graph, Add Transparent profile from device resources under Libraries->Harmony->wireless->drivers->BLE->Profiles and configure as shown below.
+**Step 6** - In MCC harmony project graph, Add Transparent profile from device resources under Libraries->Harmony->wireless->drivers->BLE->Profiles and configure as shown below.
 
 ![](docs/13_transparent_profile.png)
 
@@ -182,34 +136,42 @@ SET_DISPLAY_START_LINE_COMMAND
 
 ![](docs/trans_pro_satis.png)
 
-**Step 12** - In MCC harmony project graph, select system and configure as mentioned below.
+**Step 7** - In MCC harmony project graph, Add CONSOLE from Device Resources under Libraries->Harmony->System Services to add the "CONSOLE" component as shown below.
+
+![](docs/sercom0_satis.png)
+
+- To add satisfiers as shown above right click on the "⬦" in CONSOLE->UART and add the satisfier "SERCOM0" to add the component. Then select the SERCOM0 to configure as shown below.
+
+![](docs/10_sercom0.png)
+
+**Step 8** - In MCC harmony project graph, select system and configure as mentioned below.
 
 ![](docs/2_system1.png)
 
-**Step 13** - In MCC harmony project graph, select Core and verify the mentioned below.
+**Step 9** - In MCC harmony project graph, select Core and verify the mentioned below.
 
 ![](docs/5_core.png)
 
-**Step 14** - In MCC harmony project graph, select FreeRTOS and configure as mentioned below.
+**Step 10** - In MCC harmony project graph, select FreeRTOS and configure as mentioned below.
 
 ![](docs/4_freertos.png)
 
-**Step 15** - In project graph, go to Plugins->Pin configurations->Pin settings and set the pin configuration as shown below.
+**Step 11** - In project graph, go to Plugins->Pin configurations->Pin settings and set the pin configuration as shown below.
 
 - Use these PIN Names while configuring.
 
 ```
-GFX_DISP_INTF_PIN_CS
-GFX_DISP_INTF_PIN_RSDC
-GFX_DISP_INTF_PIN_RESET
-GFX_DISP_INTF_PIN_EN
+CLICK_EINK_BUNDLE_CS
+CLICK_EINK_BUNDLE_DC
+CLICK_EINK_BUNDLE_RST
+CLICK_EINK_BUNDLE_BSY
 ```
 
 ![](docs/pinsetting.png)
 
-**Step 16** - [Generate](https://onlinedocs.microchip.com/pr/GUID-A5330D3A-9F51-4A26-B71D-8503A493DF9C-en-US-1/index.html?GUID-9C28F407-4879-4174-9963-2CF34161398E) the code.
+**Step 12** - [Generate](https://onlinedocs.microchip.com/pr/GUID-A5330D3A-9F51-4A26-B71D-8503A493DF9C-en-US-1/index.html?GUID-9C28F407-4879-4174-9963-2CF34161398E) the code.
 
-**Step 17** - From the unzipped folder copy the folder click_routines(which contains the oled_c.h & oled_c.c) to the folder firmware/src under your MPLAB Harmony v3 application project and add the Header (oled_c.h) and Source file (oled_c.c).
+**Step 13** - From the unzipped folder copy the folder click_routines(which contains the eink_bundle.h, eink_bundle_font.h, eink_bundle_image.h, eink_bundle.c,  eink_bundle_font.c, eink_bundle_image.c) to the folder firmware/src under your MPLAB Harmony v3 application project and add the Header (eink_bundle.h, eink_bundle_font.h, eink_bundle_image.h) and Source file (eink_bundle.c, eink_bundle_font.c, eink_bundle_image.c).
 
 - In the project explorer, Right click on folder Header Files and add a sub folder click_routines by selecting “Add Existing Items from Folders…”
 
@@ -227,7 +189,7 @@ GFX_DISP_INTF_PIN_EN
 
 ![](docs/header_add4.png)
 
-- The OLED C lick header files gets added to your project.
+- The eink bundle header files gets added to your project.
 
 ![](docs/header_add5.png)
 
@@ -247,49 +209,25 @@ GFX_DISP_INTF_PIN_EN
 
 ![](docs/source_add4.png)
 
-- The OLED C Click source files gets added to your project.
+- The eink bundle source files gets added to your project.
 
 ![](docs/source_add5.png)
 
-- The click_routines folder contain an C source file oled_c.c. You could use oled_c.c as a reference to add OLED C display functionality to your application.
+- The click_routines folder contain an C source file eink_bundle.c. You could use eink_bundle.c as a reference to add E-Paper display functionality to your application.
 
-**Step 18** - Design Graphics on Legato Graphics Composer.
-
-| Tip: Refer the link for [MPLAB® Harmony 3 Graphics Support Package](https://github.com/Microchip-MPLAB-Harmony/gfx)!! |
-| --- |
-
-- From the Cloned folder copy "WBZ451_OLED_BLE_UART_LEGATO.zip" file to the folder firmware\src\config\default under your MPLAB Harmony v3 application project.
-
-- Open Legato graphics composer from “Project Graph > Plugins > Legato Graphics Composer”.
-
-![](docs/legato1.png)
-
-- Click on Load an existing project.
-
-![](docs/legato2.png)
-
-- Design the graphics using “Legato Graphics Composer”.
-
-![](docs/legato_config.png)
-
-- Use Object Editor to edit the configuration for Input Widgets and Dispaly Widgets
-
-![](docs/image_1.png)
-
-- The Legato Graphics Composer for the "WBZ451_OLED_BLE_UART_LEGATO.zip" OLED Application is shown below.
-
-![](docs/legato_composer.png)
-
-**Step 19** - Change the following Code as givien below.
+**Step 14** - Change the following Code as givien below.
 
 - In your MPLAB Harmony v3 based application go to "firmware\src\app_user_edits.c", make sure the below code line is commented.
 
-  - "#error User action required - manually edit files as described here".
+```
+//#error User action required - manually edit files as described here.
+```
 
 - In your MPLAB Harmony v3 based application go to "firmware\src\config\default\peripheral\sercom\spi_master\plib_sercom1_spi_master.c" and do the following changes.
   
   - At Line 177 include the following code to setup the clock frequency.  
-```
+  
+	```
 	if (setup->clockFrequency == 0)
 		{
 			baudValue = SERCOM1_SPIM_BAUD_VALUE;
@@ -298,311 +236,17 @@ GFX_DISP_INTF_PIN_EN
 		{
 			baudValue = (spiSourceClock/(2U*(setup->clockFrequency))) - 1U;
 		}
-```			
+	```		
+
 ![](docs/plib_sercom1_spi_master.png)
-
-
-- In your MPLAB Harmony v3 based application go to "firmware\src\config\default\gfx\legato\generated\le_gen_harmony.c" and do the following changes.
-
-  - Comment the following lines.
-
-    - Line 29: 	
-	```
-	//#include "system/input/sys_input.h"
-	```
-    - Line 32: 	
-	```
-	//SYS_INP_InputListener inputListener;
-	```
-    - Line 34: 	
-	```
-	//static void touchDownHandler(const SYS_INP_TouchStateEvent* const evt);
-    ```
-	- Line 35: 	
-	```
-	//static void touchUpHandler(const SYS_INP_TouchStateEvent* const evt);
-    ```
-	- Line 36: 	
-	```
-	//static void touchMoveHandler(const SYS_INP_TouchMoveEvent* const evt);
-	```
-	- Line 58: 	
-	```
-	//inputListener.handleTouchDown = &touchDownHandler;
-	```
-	- Line 59: 	
-	```
-	//inputListener.handleTouchUp = &touchUpHandler;
-	```
-	- Line 60: 	
-	```
-	//inputListener.handleTouchMove = &touchMoveHandler;
-	```
-	- Line 71: 	
-	```
-	//SYS_INP_AddListener(&inputListener);
-	```
-	
-  - Line 95 to 108: Comment the following lines.
-  
-	```
-	//void touchDownHandler(const SYS_INP_TouchStateEvent* const evt)
-	//{
-		//leInput_InjectTouchDown(evt->index, evt->x, evt->y);
-	//}
-	//void touchUpHandler(const SYS_INP_TouchStateEvent* const evt)
-	//{
-		//leInput_InjectTouchUp(evt->index, evt->x, evt->y);
-	//}
-	//void touchMoveHandler(const SYS_INP_TouchMoveEvent* const evt)
-	//{
-		//leInput_InjectTouchMoved(evt->index, evt->x, evt->y);
-	//}
-	```
 
 - In your MPLAB Harmony v3 based application go to "firmware\src\app.h" and do the following changes.
 
-	- Add the line "APP_MSG_DISPLAY_EVT" & "APP_MSG_OLEDC_EVT" as shown below.
-	
-```
-APP_MSG_BLE_DISPLAY_EVT,
-APP_MSG_OLEDC_EVT,
-```
-![](docs/APP_MSG_DISPLAY_EVT.png)
+	- Copy & Paste the Code in [app.h](https://github.com/MicrochipTech/PIC32CXBZ2_WBZ45x_BLE_UART_E_PAPER_Display/blob/main/WBZ451_E_PAPER_BLE_UART/WBZ451_E_PAPER/firmware/src/app.h)
 
 - In your MPLAB Harmony v3 based application go to "firmware\src\app.c" and do the following changes.
 
-	- Copy & Paste the following Code.
-	
-```
-// DOM-IGNORE-BEGIN
-/*******************************************************************************
-* Copyright (C) 2022 Microchip Technology Inc. and its subsidiaries.
-*
-* Subject to your compliance with these terms, you may use Microchip software
-* and any derivatives exclusively with Microchip products. It is your
-* responsibility to comply with third party license terms applicable to your
-* use of third party software (including open source software) that may
-* accompany Microchip software.
-*
-* THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER
-* EXPRESS, IMPLIED OR STATUTORY, APPLY TO THIS SOFTWARE, INCLUDING ANY IMPLIED
-* WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A
-* PARTICULAR PURPOSE.
-*
-* IN NO EVENT WILL MICROCHIP BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE,
-* INCIDENTAL OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY KIND
-* WHATSOEVER RELATED TO THE SOFTWARE, HOWEVER CAUSED, EVEN IF MICROCHIP HAS
-* BEEN ADVISED OF THE POSSIBILITY OR THE DAMAGES ARE FORESEEABLE. TO THE
-* FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN
-* ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
-* THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
-*******************************************************************************/
-// DOM-IGNORE-END
-
-/*******************************************************************************
-  MPLAB Harmony Application Source File
-
-  Company:
-    Microchip Technology Inc.
-
-  File Name:
-    app.c
-
-  Summary:
-    This file contains the source code for the MPLAB Harmony application.
-
-  Description:
-    This file contains the source code for the MPLAB Harmony application.  It
-    implements the logic of the application's state machine and it may call
-    API routines of other MPLAB Harmony modules in the system, such as drivers,
-    system services, and middleware.  However, it does not call any of the
-    system interfaces (such as the "Initialize" and "Tasks" functions) of any of
-    the modules in the system or make any assumptions about when those functions
-    are called.  That is the responsibility of the configuration-specific system
-    files.
- *******************************************************************************/
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Included Files
-// *****************************************************************************
-// *****************************************************************************
-#include <string.h>
-#include "app.h"
-#include "definitions.h"
-#include "app_ble.h"
-#include "click_routines/oled_c/oled_c.h"
-#include "ble_trsps/ble_trsps.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include "system/console/sys_console.h"
-#include "configuration.h"
-#include "osal/osal.h"
-
-SYS_CONSOLE_HANDLE readConsoleHandle;
-SYS_CONSOLE_HANDLE writeConsoleHandle;
-
-uint16_t conn_hdl = 0xFFFF;
-// *****************************************************************************
-// *****************************************************************************
-// Section: Global Data Definitions
-// *****************************************************************************
-// *****************************************************************************
-
-// *****************************************************************************
-/* Application Data
-
-  Summary:
-    Holds application data
-
-  Description:
-    This structure holds the application's data.
-
-  Remarks:
-    This structure should be initialized by the APP_Initialize function.
-
-    Application strings and buffers are be defined outside this structure.
-*/
-
-APP_DATA appData;
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Application Callback Functions
-// *****************************************************************************
-// *****************************************************************************
-
-/* TODO:  Add any necessary callback functions.
-*/
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Application Local Functions
-// *****************************************************************************
-// *****************************************************************************
-
-
-/* TODO:  Add any necessary local functions.
-*/
-
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Application Initialization and State Machine Functions
-// *****************************************************************************
-// *****************************************************************************
-
-/*******************************************************************************
-  Function:
-    void APP_Initialize ( void )
-
-  Remarks:
-    See prototype in app.h.
- */
-
-void APP_Initialize ( void )
-{
-    /* Place the App state machine in its initial state. */
-    appData.state = APP_STATE_INIT;
-    
-    appData.appQueue = xQueueCreate( 64, sizeof(APP_Msg_T) );
-    /* TODO: Initialize your application's state machine and other
-     * parameters.
-     */
-}
-
-
-/******************************************************************************
-  Function:
-    void APP_Tasks ( void )
-
-  Remarks:
-    See prototype in app.h.
- */
-void APP_Tasks ( void )
-{
-    APP_Msg_T    appMsg[1];
-    APP_Msg_T   *p_appMsg;
-    p_appMsg=appMsg;
-
-    /* Check the application's current state. */
-    switch ( appData.state )
-    {
-        /* Application's initial state. */
-        case APP_STATE_INIT:
-        {
-            bool appInitialized = true;
-            //appData.appQueue = xQueueCreate( 10, sizeof(APP_Msg_T) );
-            APP_BleStackInit();
-            RTC_Timer32Start();
-            BLE_GAP_SetAdvEnable(0x01, 0);
-            SERCOM0_USART_Write((uint8_t *)"WBZ451_OLED_BLE_UART\r\n",24);
-            writeConsoleHandle=SYS_CONSOLE_HandleGet(SYS_CONSOLE_INDEX_0);
-            
-            if (appInitialized)
-            {
-                appData.state = APP_STATE_LCD_INIT;
-            }
-            break;
-        }
-        
-        case APP_STATE_LCD_INIT:
-        {
-            LCD_INIT();
-            appData.state = APP_STATE_SERVICE_TASKS;            
-            break;
-        }
-
-        case APP_STATE_SERVICE_TASKS:
-        {
-            if (OSAL_QUEUE_Receive(&appData.appQueue, &appMsg, OSAL_WAIT_FOREVER))
-            {
-                if(p_appMsg->msgId==APP_MSG_BLE_STACK_EVT)
-                {
-                    // Pass BLE Stack Event Message to User Application for handling
-                    APP_BleStackEvtHandler((STACK_Event_T *)p_appMsg->msgData);
-                }
-                if(p_appMsg->msgId==APP_MSG_BLE_STACK_LOG)
-                {
-                    // Pass BLE LOG Event Message to User Application for handling
-                    APP_BleStackLogHandler((BT_SYS_LogEvent_T *)p_appMsg->msgData);
-                }
-                else if( p_appMsg->msgId == APP_MSG_OLEDC_EVT)
-                {
-                    APP_OLEDC_Handler((uint8_t *)(p_appMsg->msgData));
-                }
-                else if(p_appMsg->msgId==APP_MSG_BLE_DISPLAY_EVT)
-                {
-                    p_appMsg->msgId=APP_MSG_OLEDC_EVT;
-                    p_appMsg->msgData[0] = APP_OLEDC_PRINT;                     
-                    oled_c_Image_mchplogo_visible();                    
-                    LCD_PRINT(0, p_appMsg->msgData[BLE_DATA_LINE], (uint8_t *)&p_appMsg->msgData[BLE_DATA]);                    
-                    OSAL_QUEUE_Send(&appData.appQueue, &p_appMsg, 0);                    
-                }
-            }
-            break;
-        }
-
-        /* TODO: implement your application state machine.*/
-
-
-        /* The default state should never be executed. */
-        default:
-        {
-            /* TODO: Handle error in application's state machine. */
-            break;
-        }
-    }
-}
-
-
-/*******************************************************************************
- End of File
- */
-
-```
+	- Copy & Paste the Code in [app.c](https://github.com/MicrochipTech/PIC32CXBZ2_WBZ45x_BLE_UART_E_PAPER_Display/blob/main/WBZ451_E_PAPER_BLE_UART/WBZ451_E_PAPER/firmware/src/app.c)
 
 - In your MPLAB Harmony v3 based application go to "firmware\src\app_ble\app_ble_handler.c" and do the following changes.
 	
@@ -611,8 +255,9 @@ void APP_Tasks ( void )
 		```
 		#include "system/console/sys_console.h"
 		#include "peripheral/sercom/usart/plib_sercom0_usart.h"
-		#include "../click_routines/oled_c/oled_c.h" 
-
+		#include "click_routines/eink_bundle/eink_bundle.h"
+		#include "app.h"	
+		
 		extern uint16_t conn_hdl;
 			
 		```
@@ -625,7 +270,8 @@ void APP_Tasks ( void )
 		APP_Msg_T    appMsg;
 		appMsg.msgId = APP_MSG_BLE_DISPLAY_EVT;
 		appMsg.msgData[BLE_DATA_LINE] = BLE_TEXT_LINE1;
-		memcpy(&appMsg.msgData[BLE_DATA], "  CONNECTED  ", BLE_TEXT_STATUS_SIZE);            
+		appMsg.msgData[BLE_DATA_SIZE] = BLE_TEXT_STATUS_SIZE;
+		memcpy(&appMsg.msgData[BLE_DATA], " CONNECTED  ", BLE_TEXT_STATUS_SIZE);            
 		appMsg.msgData[DISP_DATA_OFFSET+BLE_TEXT_STATUS_SIZE+1]= '\0';
 		SERCOM0_USART_Write((uint8_t *)"Connected\r\n",11);
 		conn_hdl = p_event->eventField.evtConnect.connHandle;
@@ -641,7 +287,8 @@ void APP_Tasks ( void )
 		APP_Msg_T    appMsg;
 		appMsg.msgId = APP_MSG_BLE_DISPLAY_EVT;
 		appMsg.msgData[BLE_DATA_LINE] = BLE_TEXT_LINE1;
-		memcpy(&appMsg.msgData[BLE_DATA], "DISCONNECTED ", BLE_TEXT_STATUS_SIZE);             
+		appMsg.msgData[BLE_DATA_SIZE] = BLE_TEXT_STATUS_SIZE;
+		memcpy(&appMsg.msgData[BLE_DATA], "DISCONNECTED", BLE_TEXT_STATUS_SIZE);             
 		appMsg.msgData[DISP_DATA_OFFSET+BLE_TEXT_STATUS_SIZE+1]= '\0';
 		SERCOM0_USART_Write((uint8_t *)"Disconnected\r\n",14);
 		conn_hdl = 0xFFFF;
@@ -660,7 +307,7 @@ void APP_Tasks ( void )
 		```
 		#includ#include "osal/osal_freertos_extend.h"
 		#include "definitions.h"
-		#include "../click_routines/oled_c/oled_c.h" 
+		#include "click_routines/eink_bundle/eink_bundle.h"	 
 		```
 	
 	![](docs/app_trsps_handler.png)
@@ -672,21 +319,22 @@ void APP_Tasks ( void )
 		uint8_t *ble_data = 0;
 		// Retrieve received data length
 		BLE_TRSPS_GetDataLength(p_event->eventField.onReceiveData.connHandle, &data_len);
-		
+
 		// Allocate memory according to data length
 		ble_data = OSAL_Malloc(data_len);
 		if(ble_data == NULL)
-			break;            
+		   break;            
 		// Retrieve received data
 		BLE_TRSPS_GetData(p_event->eventField.onReceiveData.connHandle, ble_data);
-		
+
 		APP_Msg_T    appMsg;
 		appMsg.msgId = APP_MSG_BLE_DISPLAY_EVT;
 		appMsg.msgData[BLE_DATA_LINE] = BLE_TEXT_LINE2;
+		appMsg.msgData[BLE_DATA_SIZE] = data_len;
 		memcpy(&appMsg.msgData[BLE_DATA], ble_data, data_len);
 		appMsg.msgData[DISP_DATA_OFFSET+data_len+1]= '\0';
 		OSAL_QUEUE_Send(&appData.appQueue, &appMsg, 0);
-		
+
 		// Free memory	
 		OSAL_Free(ble_data);
 
@@ -695,23 +343,37 @@ void APP_Tasks ( void )
 	![](docs/BLE_TRSPS_EVT_RECEIVE_DATA.png)
 
 	
-**Step 20** - Clean and build the project. To run the project, select "Make and program device" button.
+- In your MPLAB Harmony v3 based application go to "firmware\src\app_ble\app_ble.c" and do the following changes.
 
-**Step 21** - To the test the application in MBD app follow the steps provided below and the link for the [TRANSPARENT BLE UART](https://github.com/Microchip-MPLAB-Harmony/wireless_apps_pic32cxbz2_wbz45/tree/master/apps/ble/building_blocks/peripheral/profiles_services/peripheral_trp_uart).
+	- Under the "APP_BleConfigBasic()" add the following code.
+	
+		```
+		BLE_GAP_Addr_T devAddr;
+		devAddr.addrType = BLE_GAP_ADDR_TYPE_PUBLIC;
+		devAddr.addr[5] = 0xD1;
+		devAddr.addr[4] = 0xD2;
+		devAddr.addr[3] = 0xD3;
+		devAddr.addr[2] = 0xD4;
+		devAddr.addr[1] = 0xD5;
+		devAddr.addr[0] = 0xD6;
 
-![](docs/mbd1.PNG) ![](docs/mbd2.PNG) ![](docs/mbd3.PNG) ![](docs/mbd4.PNG) ![](docs/mbd5.PNG) ![](docs/mbd6.PNG) ![](docs/mbd7.PNG) ![](docs/mbd8.PNG)
+		```
+	
+	![](docs/app_ble.png)
+	
+	
+**Step 15** - Clean and build the project. To run the project, select "Make and program device" button.
 
+**Step 16** - To the test the application in MBD app follow the steps provided below and the link for the [TRANSPARENT BLE UART](https://github.com/Microchip-MPLAB-Harmony/wireless_apps_pic32cxbz2_wbz45/tree/master/apps/ble/building_blocks/peripheral/profiles_services/peripheral_trp_uart).
 
-**Step 22** - The data printed onto the tera term is shown below.
+![](docs/mbd1.PNG) ![](docs/mbd2.PNG) ![](docs/mbd3.PNG) ![](docs/mbd4.PNG) ![](docs/mbd5.PNG) ![](docs/mbd6.PNG)
+
+**Step 17** - The data printed onto the tera term is shown below.
 
 - Baud rate: 115200
 - Com port: COM USB serial port
 
 ![](docs/WBZ451_Teraterm.PNG)
-
-### Application Flowchart for the OLED Application:
-
-![](docs/flowchart.png)
 
 ## 6. Board Programming<a name="step6">
 
@@ -727,13 +389,13 @@ Follow the steps provided in the link to [program the precompiled hex file](http
 
 The application folder can be found by navigating to the following path: 
 
-- "WBZ451_OLED_BLE_UART\firmware\WBZ451_OLED_BLE_UART.X"
+- "WBZ451_E_PAPER_BLE_UART\firmware\WBZ451_E_PAPER_BLE_UART.X"
 
 Follow the steps provided in the link to [Build and program the application](https://github.com/Microchip-MPLAB-Harmony/wireless_apps_pic32cxbz2_wbz45/tree/master/apps/ble/advanced_applications/ble_sensor#build-and-program-the-application-guid-3d55fb8a-5995-439d-bcd6-deae7e8e78ad-section).
 
 ## 7. Run the demo<a name="step7">
 
-- After programming the board, the expected application behavior is shown in the below [video](https://github.com/MicrochipTech/PIC32CXBZ2_WBZ45x_BLE_UART_OLED_Display/blob/main/docs/Working_Demo.gif).
+- After programming the board, the expected application behavior is shown in the below [video](https://github.com/MicrochipTech/PIC32CXBZ2_WBZ45x_BLE_UART_E_PAPER_Display/blob/main/docs/Working_Demo.gif).
 
 ![Alt Text](docs/Working_Demo.gif)
 
