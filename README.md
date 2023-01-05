@@ -83,7 +83,6 @@ The E-Paper 2.13" display is based on Active Matrix Electrophoretic Display (AME
 	  - wolfssl version: v4.7.0
 	  - crypto version: v3.7.6
 	    
-- Any Serial Terminal application like [TERA TERM](https://download.cnet.com/Tera-Term/3000-2094_4-75766675.html) terminal application
 
 - [Microchip Bluetooth Data (MBD) iOS/Android app](https://play.google.com/store/apps/details?id=com.microchip.bluetooth.data&hl=en_IN&gl=US)
 
@@ -242,11 +241,11 @@ CLICK_EINK_BUNDLE_BSY
 
 - In your MPLAB Harmony v3 based application go to "firmware\src\app.h" and do the following changes.
 
-	- Copy & Paste the Code in [app.h](https://github.com/MicrochipTech/PIC32CXBZ2_WBZ45x_BLE_UART_E_PAPER_Display/blob/main/WBZ451_E_PAPER_BLE_UART/WBZ451_E_PAPER/firmware/src/app.h)
+	- Copy & Paste the Code in [app.h](https://github.com/MicrochipTech/PIC32CXBZ2_WBZ45x_BLE_UART_E_PAPER_Display/blob/main/WBZ451_E_PAPER_BLE_UART/firmware/src/app.h)
 
 - In your MPLAB Harmony v3 based application go to "firmware\src\app.c" and do the following changes.
 
-	- Copy & Paste the Code in [app.c](https://github.com/MicrochipTech/PIC32CXBZ2_WBZ45x_BLE_UART_E_PAPER_Display/blob/main/WBZ451_E_PAPER_BLE_UART/WBZ451_E_PAPER/firmware/src/app.c)
+	- Copy & Paste the Code in [app.c](https://github.com/MicrochipTech/PIC32CXBZ2_WBZ45x_BLE_UART_E_PAPER_Display/blob/main/WBZ451_E_PAPER_BLE_UART/firmware/src/app.c)
 
 - In your MPLAB Harmony v3 based application go to "firmware\src\app_ble\app_ble_handler.c" and do the following changes.
 	
@@ -368,12 +367,6 @@ CLICK_EINK_BUNDLE_BSY
 
 ![](docs/mbd1.png) ![](docs/mbd2.png) ![](docs/mbd3.png) ![](docs/mbd4.png) ![](docs/mbd5.png) ![](docs/mbd6.png)
 
-**Step 17** - The data printed onto the tera term is shown below.
-
-- Baud rate: 115200
-- Com port: COM USB serial port
-
-![](docs/WBZ451_Teraterm.PNG)
 
 ## 6. Board Programming<a name="step6">
 
