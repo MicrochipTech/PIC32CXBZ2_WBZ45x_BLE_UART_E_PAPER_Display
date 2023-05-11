@@ -1,4 +1,4 @@
-# WBZ45x BLE UART WITH E-PAPER DISPLAY
+# PIC32CXBZ2_WBZ45x BLE UART WITH E-PAPER DISPLAY
 
 <img src="docs/IoT-Made-Easy-Logo.png" width=100>
 
