@@ -4,10 +4,10 @@
     "content": {
         "metaDataVersion": "1.3.0",
         "name": "com.microchip.mplabx.project.PIC32CXBZ2_WBZ45x_BLE_UART_E_PAPER_Display",
-        "version": "1.0.1",
-        "displayName": "WBZ45x BLE UART WITH E-PAPER DISPLAY",
+        "version": "1.0.0",
+        "displayName": "PIC32CXBZ2_WBZ45x BLE UART WITH E-PAPER DISPLAY",
         "projectName": "PIC32CXBZ2_WBZ45x_BLE_UART_E_PAPER_Display",
-        "shortDescription": "This application demonstrates the integration of the E-PAPER Display and BLE stack on the PIC32CxBZ2/WBZ451 device.",
+        "shortDescription": "IoT Made Easy!-This application demonstrates the integration of the E-PAPER Display and BLE stack on the PIC32CxBZ2/WBZ451 device.",
         "ide": {
             "name": "MPLAB X",
             "semverRange": ">=6.00"
